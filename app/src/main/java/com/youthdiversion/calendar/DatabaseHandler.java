@@ -1,5 +1,6 @@
 package com.youthdiversion.calendar;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -69,5 +70,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         // create new tables
         onCreate(db);
+    }
+
+    //creating an input into the availability table
+    public long InsertAvailability(Availability availability, long[] availability_ids)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        
+        ContentValues values = new ContentValues();
+        values.put(AVAIL_KEY, availability.getId());
+        values.put(AVAIL_FOREIGN, availability.getMember_id());
+        db.execSQL("INSERT INTO availability(date, startTime, endtime, member_id) VALUES('" + availability.getDate() +
+                "', '" + availability.getStartTime() + "', " + availability.getEndTime() + "'");
+
+        long availability_id = db.insert(TABLE_AVAILABILITY, null, values);
+
+        return availability_id;
     }
 }
