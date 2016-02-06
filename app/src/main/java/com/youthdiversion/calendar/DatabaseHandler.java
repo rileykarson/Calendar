@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.Console;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Christopher on 2/6/2016.
@@ -54,7 +56,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Tag table create statement
     private static final String CREATE_TABLE_AVAILABILITY = "CREATE TABLE "
             + TABLE_AVAILABILITY + "(" + AVAIL_KEY + " INTEGER PRIMARY KEY," + AVAIL_DATE
-            + " DATETIME," + AVAIL_START + " DATETIME," + AVAIL_END + " DATETIME,"+ AVAIL_FOREIGN + " INTEGER" + ")";
+            + " TEXT," + AVAIL_START + " TEXT," + AVAIL_END + " TEXT,"+ AVAIL_FOREIGN + " INTEGER" + ")";
 
 
     public DatabaseHandler(Context context) {
@@ -64,7 +66,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        System.out.println("DATABASE on Create");
+
         db.execSQL(CREATE_TABLE_MEMBER);
         db.execSQL(CREATE_TABLE_AVAILABILITY);
     }
@@ -74,9 +76,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_AVAILABILITY);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEMBER);
-
         // create new tables
         onCreate(db);
+    }
+
+    public static String format(GregorianCalendar calendar){
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        fmt.setCalendar(calendar);
+        String dateFormatted = fmt.format(calendar.getTime());
+        return dateFormatted;
     }
 
     //creating an input into the availability table
@@ -87,8 +95,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(AVAIL_KEY, availability.getId());
         values.put(AVAIL_FOREIGN, availability.getMember_id());
-        db.execSQL("INSERT INTO availability(date, startTime, endtime, member_id) VALUES('" + availability.getDate() +
-                "', '" + availability.getStartTime() + "', " + availability.getEndTime() + "'");
+        db.execSQL("INSERT INTO availability(date, startTime, endtime, member_id, avail_id) VALUES('" + availability.getDate() +
+                "', '" + availability.getStartTime() + "', '" + availability.getEndTime() + "', " + availability.getId() + ", " + availability.getMember_id() + ");");
 
         long availability_id = db.insert(TABLE_AVAILABILITY, null, values);
 
@@ -150,5 +158,4 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete( TABLE_MEMBER, MEMBER_KEY + " = ?", new String[] {String.valueOf(memberID)});
     }
-
 }
