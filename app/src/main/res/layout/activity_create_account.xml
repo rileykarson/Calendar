@@ -17,31 +17,71 @@
         android:text="Email"
         android:ems="10"
         android:id="@+id/emailField"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="193dp" />
+        android:layout_below="@+id/lastNameField"
+        android:layout_alignLeft="@+id/passwordField"
+        android:layout_alignStart="@+id/passwordField"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="First Name"
         android:ems="10"
-        android:id="@+id/nameField"
-        android:layout_marginTop="51dp"
-        android:layout_alignTop="@+id/emailField"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/firstNameField"
+        android:layout_alignLeft="@+id/lastNameField"
+        android:layout_alignStart="@+id/lastNameField" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/submit_button"
-        android:layout_below="@+id/nameField"
-        android:layout_marginTop="36dp"
-        android:layout_alignRight="@+id/nameField"
-        android:layout_alignEnd="@+id/nameField"
-        android:layout_alignLeft="@+id/nameField"
-        android:layout_alignStart="@+id/nameField"
-        android:onClick="onClickSubmitButton" />
+        android:onClick="onClickSubmitButton"
+        android:layout_below="@+id/passwordField"
+        android:layout_alignRight="@+id/passwordField"
+        android:layout_alignEnd="@+id/passwordField"
+        android:layout_alignLeft="@+id/passwordField"
+        android:layout_alignStart="@+id/passwordField" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Last Name"
+        android:ems="10"
+        android:id="@+id/lastNameField"
+        android:layout_below="@+id/firstNameField"
+        android:layout_alignLeft="@+id/emailField"
+        android:layout_alignStart="@+id/emailField" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/phoneField"
+        android:text="Phone"
+        android:layout_below="@+id/emailField"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="id"
+        android:ems="10"
+        android:id="@+id/idField"
+        android:layout_below="@+id/phoneField"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Password"
+        android:ems="10"
+        android:id="@+id/passwordField"
+        android:layout_below="@+id/idField"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

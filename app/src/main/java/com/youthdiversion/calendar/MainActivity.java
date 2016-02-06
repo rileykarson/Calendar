@@ -15,8 +15,12 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final String NAME = "namekey";
+    public final String FIRSTNAME = "firstnamekey";
+    public final String LASTNAME = "lastnamekey";
     public final String EMAIL = "emailkey";
+    public final String ID = "idkey";
+    public final String PHONE = "phonekey";
+    public final String PASSWORD = "passwordkey";
     public static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences sharedpreferences;
     DatabaseHandler db;
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        String name = sharedpreferences.getString(NAME, "");
+        String name = sharedpreferences.getString(FIRSTNAME, "");
         if (name == "") {
             Intent intent = new Intent(this, CreateAccount.class);
             startActivity(intent);
@@ -42,8 +46,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.remove(NAME);
+                editor.remove(FIRSTNAME);
+                editor.remove(LASTNAME);
                 editor.remove(EMAIL);
+                editor.remove(ID);
+                editor.remove(PHONE);
+                editor.remove(PASSWORD);
                 editor.commit();
             }
         });

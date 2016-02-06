@@ -12,8 +12,12 @@ import android.widget.EditText;
 
 public class CreateAccount extends AppCompatActivity {
 
-    public final String NAME = "namekey";
+    public final String FIRSTNAME = "firstnamekey";
+    public final String LASTNAME = "lastnamekey";
     public final String EMAIL = "emailkey";
+    public final String ID = "idkey";
+    public final String PHONE = "phonekey";
+    public final String PASSWORD = "passwordkey";
     public static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences sharedpreferences;
 
@@ -25,19 +29,29 @@ public class CreateAccount extends AppCompatActivity {
 
     public void onClickSubmitButton(View v) {
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        String restoredText = sharedpreferences.getString(NAME, "LOL");
-        ((Button)v).setText(restoredText);
-        EditText nameField=(EditText)findViewById(R.id.nameField);
+        EditText firstNameField=(EditText)findViewById(R.id.firstNameField);
+        EditText lastNameField=(EditText)findViewById(R.id.lastNameField);
         EditText emailField=(EditText)findViewById(R.id.emailField);
-        String name = nameField.getText().toString();
+        EditText idField=(EditText)findViewById(R.id.idField);
+        EditText phoneField=(EditText)findViewById(R.id.phoneField);
+        EditText passwordField=(EditText)findViewById(R.id.passwordField);
+        String firstName = firstNameField.getText().toString();
+        String lastName = lastNameField.getText().toString();
         String email = emailField.getText().toString();
-        if (name.isEmpty() || email.isEmpty()) {
+        String id = idField.getText().toString();
+        String phone = phoneField.getText().toString();
+        String password = passwordField.getText().toString();
+        if (firstName.isEmpty() || email.isEmpty() || lastName.isEmpty() || id.isEmpty() || phone.isEmpty() || password.isEmpty()) {
             Snackbar.make(v, "Please fill in the fields.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         } else {
             SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putString(NAME, name);
+            editor.putString(FIRSTNAME, firstName);
+            editor.putString(LASTNAME, lastName);
             editor.putString(EMAIL, email);
+            editor.putString(ID, id);
+            editor.putString(PHONE, phone);
+            editor.putString(PASSWORD, password);
             editor.commit();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
