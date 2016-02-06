@@ -4,7 +4,62 @@
     tools:context="com.youthdiversion.calendar.AddInfo_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/startTime"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="84dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/endTime"
+            android:layout_below="@+id/startView"
+            android:layout_alignLeft="@+id/startView"
+            android:layout_alignStart="@+id/startView"
+            android:layout_marginTop="38dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Time"
+            android:id="@+id/startView"
+            android:layout_below="@+id/startTime"
+            android:layout_alignLeft="@+id/startTime"
+            android:layout_alignStart="@+id/startTime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Time"
+            android:id="@+id/endView"
+            android:layout_below="@+id/endTime"
+            android:layout_alignLeft="@+id/endTime"
+            android:layout_alignStart="@+id/endTime" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:id="@+id/availSubmit"
+            android:layout_below="@+id/endView"
+            android:layout_marginTop="58dp"
+            android:layout_alignRight="@+id/endTime"
+            android:layout_alignEnd="@+id/endTime"
+            android:layout_alignLeft="@+id/endView"
+            android:layout_alignStart="@+id/endView" />
+    </RelativeLayout>
 
 </FrameLayout>
