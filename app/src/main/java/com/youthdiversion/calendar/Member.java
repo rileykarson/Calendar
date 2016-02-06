@@ -6,11 +6,11 @@ package com.youthdiversion.calendar;
 public class Member {
 
     private String fName, lName, password, email, phone;
-    private int id;
+    private int member_id;
 
     public Member(int id, String fName, String lName, String password, String email, String phone) {
 
-        this.id = id;
+        this.member_id = id;
         this.fName = fName;
         this.lName = lName;
         this.password = password;
@@ -59,10 +59,10 @@ public class Member {
     }
 
     public int getId() {
-        return id;
+        return member_id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.member_id = id;
     }
 }
