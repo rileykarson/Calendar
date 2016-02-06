@@ -20,8 +20,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
+    compile files('C:/AndroidDev/YouthDiversion/youthdiversion-calendar/libs/ical4j-2.0-beta1.jar')
+    compile files('C:/AndroidDev/YouthDiversion/youthdiversion-calendar/libs/ical4j-2.0-beta1-sources.jar')
+    compile files('C:/AndroidDev/YouthDiversion/youthdiversion-calendar/libs/ical4j-2.0-beta1-javadoc.jar')
+    compile files('C:/AndroidDev/YouthDiversion/youthdiversion-calendar/libs/slf4j.jar')
+    compile files('C:/AndroidDev/YouthDiversion/youthdiversion-calendar/libs/logback-classic.jar')
 }
