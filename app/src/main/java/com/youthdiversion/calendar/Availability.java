@@ -1,23 +1,19 @@
 package com.youthdiversion.calendar;
 
-import java.sql.Date;
-import java.sql.Time;
 
 /**
  * Created by Christopher on 2/6/2016.
  */
 public class Availability {
     private int avail_id, member_id;
-    private Time startTime;
-    private Time endTime;
-    private Date date;
+    private String startTime;
+    private String endTime;
 
-    public Availability(int id,int member_id, Time startTime, Time endTime, Date date) {
+    public Availability(int id,int member_id, String startTime, String endTime) {
         this.avail_id = id;
         this.member_id = member_id;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.date = date;
     }
 
     public int getId() {
@@ -36,27 +32,20 @@ public class Availability {
         this.member_id = member_id;
     }
 
-    public Time getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }
