@@ -25,12 +25,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     //member columns
+    private static final String MEMBER_KEY = "member_id";
     private static final String MEMBER_LNAME = "lName";
     private static final String MEMBER_FNAME = "fName";
     private static final String MEMBER_PHONE = "phone";
     private static final String MEMBER_EMAIL = "email";
     private static final String MEMBER_PASSWORD = "password";
-    private static final String MEMBER_KEY = "member_id";
+
 
     //Availability column
     private static final String AVAIL_KEY = "avail_id";
@@ -74,9 +75,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // create new tables
         onCreate(db);
     }
-    
+
     //creating an input into the availability table
-    public long InsertAvailability(Availability availability, long[] availability_ids)
+    public long InsertAvailability(Availability availability)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         
@@ -91,4 +92,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return availability_id;
     }
 
+    //creating an input into the member table
+    public long InsertMember(Member member)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(MEMBER_KEY, member.getId());
+        values.put(MEMBER_LNAME, member.getlName());
+        values.put(MEMBER_FNAME, member.getfName());
+        values.put(MEMBER_PHONE, member.getPhone());
+        values.put(MEMBER_EMAIL, member.getEmail());
+        values.put(MEMBER_PASSWORD, member.getPassword());
+
+
+        long member_id = db.insert(TABLE_MEMBER, null, values);
+
+        return member_id;
+    }
 }
