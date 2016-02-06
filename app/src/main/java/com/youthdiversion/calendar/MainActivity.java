@@ -28,7 +28,15 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("In main on create");
 
         db = new DatabaseHandler(getApplicationContext());
+        GregorianCalendar start = new GregorianCalendar(2016, 02, 06, 4, 00, 00);
+        GregorianCalendar end = new GregorianCalendar(2017, 02, 06, 6, 30, 00);
 
+        Member member = new Member(1, "c", "c", "pass", "email", "3636495864");
+        Availability availability = new Availability(1, 1, format(start), format(end));
+
+
+        db.updateMember(member);
+        db.updateAvailability(availability);
 
 
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

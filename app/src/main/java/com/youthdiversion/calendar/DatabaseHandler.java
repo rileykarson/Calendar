@@ -39,7 +39,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Availability column
     private static final String AVAIL_KEY = "avail_id";
-    private static final String AVAIL_DATE = "date";
     private static final String AVAIL_START = "startTime";
     private static final String AVAIL_END = "endTime";
     private static final String AVAIL_FOREIGN = "member_id";
@@ -55,8 +54,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Tag table create statement
     private static final String CREATE_TABLE_AVAILABILITY = "CREATE TABLE "
-            + TABLE_AVAILABILITY + "(" + AVAIL_KEY + " INTEGER PRIMARY KEY," + AVAIL_DATE
-            + " TEXT," + AVAIL_START + " TEXT," + AVAIL_END + " TEXT,"+ AVAIL_FOREIGN + " INTEGER" + ")";
+            + TABLE_AVAILABILITY + "(" + AVAIL_KEY + " INTEGER PRIMARY KEY," +
+            AVAIL_START + " TEXT," + AVAIL_END + " TEXT,"+ AVAIL_FOREIGN + " INTEGER" + ")";
 
 
     public DatabaseHandler(Context context) {
@@ -95,18 +94,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(AVAIL_KEY, availability.getId());
         values.put(AVAIL_FOREIGN, availability.getMember_id());
-        db.execSQL("INSERT INTO availability(date, startTime, endtime, member_id, avail_id) VALUES('" + availability.getDate() +
-                "', '" + availability.getStartTime() + "', '" + availability.getEndTime() + "', " + availability.getId() + ", " + availability.getMember_id() + ");");
+        values.put(AVAIL_START, availability.getStartTime());
+        values.put(AVAIL_END, availability.getEndTime());
 
         long availability_id = db.insert(TABLE_AVAILABILITY, null, values);
 
         return availability_id;
     }
 
-    //update an input in the availability table
-    public void UpdateAvailability(Availability availability)
+    //update an input in the member table
+    public int updateAvailability(Availability availability)
     {
-        //TODO: IMPLEMENT AVAIALBILITY UPDATE ONCE DATE CONFIGURED
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(AVAIL_KEY, availability.getId());
+        values.put(AVAIL_START, availability.getStartTime());
+        values.put(AVAIL_END, availability.getEndTime());
+        values.put(AVAIL_FOREIGN, availability.getMember_id());
+
+        return db.update(TABLE_AVAILABILITY, values, AVAIL_KEY + "= ?", new String[] {String.valueOf(availability.getId())});
+
     }
 
     //deleting an input in the availability table
