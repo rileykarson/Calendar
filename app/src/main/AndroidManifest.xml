@@ -26,7 +26,8 @@
         <activity
             android:name=".CreateAccount"
             android:theme="@style/NoActionBar" />
-        <activity android:name=".AvailabilityActivity"></activity>
+        <activity android:name=".AvailabilityActivity" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

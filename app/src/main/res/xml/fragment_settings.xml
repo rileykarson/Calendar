@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <EditTextPreference
+        android:key="firstnamekey"
+        android:title="First Name"
+        android:summary="%s"></EditTextPreference>
+    <EditTextPreference
+        android:key="lastnamekey"
+        android:title="Last Name"
+        android:summary="%s"></EditTextPreference>
+    <EditTextPreference
+        android:key="emailkey"
+        android:title="Email"
+        android:summary="%s"></EditTextPreference>
+    <EditTextPreference
+        android:key="idkey"
+        android:title="ID"
+        android:summary="%s"></EditTextPreference>
+    <EditTextPreference
+        android:key="phonekey"
+        android:title="Phone"
+        android:summary="%s"></EditTextPreference>
+    <EditTextPreference
+        android:key="passwordkey"
+        android:title="Password"
+        android:summary="%s"></EditTextPreference>
+</PreferenceScreen>
