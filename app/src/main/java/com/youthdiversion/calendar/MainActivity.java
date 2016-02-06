@@ -13,6 +13,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+
 public class MainActivity extends AppCompatActivity {
 
     public final String FIRSTNAME = "firstnamekey";
@@ -32,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        db = new DatabaseHandler(getApplicationContext());
+
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String name = sharedpreferences.getString(FIRSTNAME, "");
         if (name == "") {
@@ -40,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
+        
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -55,10 +64,16 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
             }
         });
-        db = new DatabaseHandler(getApplicationContext());
-
-        Member member = new Member(1, "chris", "cartwright", "password", "email", "6134545454");
     }
+
+    public static String format(GregorianCalendar calendar){
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        fmt.setCalendar(calendar);
+        String dateFormatted = fmt.format(calendar.getTime());
+        return dateFormatted;
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
