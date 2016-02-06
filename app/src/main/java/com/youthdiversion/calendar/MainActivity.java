@@ -7,11 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-<<<<<<< HEAD
+
 import android.net.ParseException;
-=======
+
 import android.net.Uri;
->>>>>>> bb812d7262905d7673d67f657c5768aea1b31915
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -188,7 +188,6 @@ public class MainActivity extends AppCompatActivity implements AddInfo_Fragment.
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-
                 startNextFragment();
             }
         });
