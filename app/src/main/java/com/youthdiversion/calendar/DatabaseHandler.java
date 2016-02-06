@@ -83,7 +83,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public long InsertAvailability(Availability availability)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        
+
         ContentValues values = new ContentValues();
         values.put(AVAIL_KEY, availability.getId());
         values.put(AVAIL_FOREIGN, availability.getMember_id());
@@ -94,6 +94,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return availability_id;
     }
+
+    //update an input in the availability table
+    public void UpdateAvailability(Availability availability)
+    {
+        //TODO: IMPLEMENT AVAIALBILITY UPDATE ONCE DATE CONFIGURED
+    }
+
+    //deleting an input in the availability table
+    public void DeleteAvailability(long availabilityID)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete( TABLE_AVAILABILITY, AVAIL_KEY + " = ?", new String[] {String.valueOf(availabilityID)});
+    }
+
 
     //creating an input into the member table
     public long InsertMember(Member member)
@@ -113,4 +127,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return member_id;
     }
+
+    //update an input in the member table
+    public int updateMember(Member member)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(MEMBER_LNAME, member.getlName());
+        values.put(MEMBER_FNAME, member.getfName());
+        values.put(MEMBER_PHONE, member.getPhone());
+        values.put(MEMBER_EMAIL, member.getEmail());
+        values.put(MEMBER_PASSWORD, member.getPassword());
+
+        return db.update(TABLE_MEMBER, values, MEMBER_KEY + "= ?", new String[] {String.valueOf(member.getId())});
+
+    }
+
+    //deleting an input in the member table
+    public void DeleteMember(long memberID)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete( TABLE_MEMBER, MEMBER_KEY + " = ?", new String[] {String.valueOf(memberID)});
+    }
+
 }
