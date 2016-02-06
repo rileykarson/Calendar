@@ -1,5 +1,8 @@
 package com.youthdiversion.calendar;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CalendarView;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences sharedpreferences;
     DatabaseHandler db;
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //fragment shit
+        fragmentManager = getFragmentManager();
+        CalendarView calendarView=(CalendarView) findViewById(R.id.calendarView);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+                startNextFragment();
+
+            }
+        });
+        //-------------end fragment shit
+
 
         db = new DatabaseHandler(getApplicationContext());
 
@@ -96,4 +116,12 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void startNextFragment()
+    {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        AddInfo_Fragment addInfo_fragment = new AddInfo_Fragment();
+        fragmentTransaction.replace(R.id.calendarView, addInfo_fragment, "addinfo");
+    }
+
 }
