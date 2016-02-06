@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.Console;
+
 /**
  * Created by Christopher on 2/6/2016.
  */
@@ -58,6 +60,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        System.out.println("onCreate");
         db.execSQL(CREATE_TABLE_MEMBER);
         db.execSQL(CREATE_TABLE_AVAILABILITY);
     }
@@ -71,7 +74,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // create new tables
         onCreate(db);
     }
-
+    
     //creating an input into the availability table
     public long InsertAvailability(Availability availability, long[] availability_ids)
     {
@@ -87,4 +90,5 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return availability_id;
     }
+
 }
