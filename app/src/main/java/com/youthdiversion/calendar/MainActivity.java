@@ -1,10 +1,17 @@
 package com.youthdiversion.calendar;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+<<<<<<< HEAD
 import android.net.ParseException;
+=======
+import android.net.Uri;
+>>>>>>> bb812d7262905d7673d67f657c5768aea1b31915
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CalendarView;
 
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.model.Calendar;
@@ -38,7 +46,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddInfo_Fragment.OnFragmentInteractionListener {
 
     public final String FIRSTNAME = "firstnamekey";
     public final String LASTNAME = "lastnamekey";
@@ -50,12 +58,30 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     DatabaseHandler db;
 
+    FragmentManager fragmentManager;
+    private CalendarView calendar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //fragment shit
+        fragmentManager = getFragmentManager();
+        CalendarView calendarView=(CalendarView) findViewById(R.id.calendarView);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+                startNextFragment();
+
+            }
+        });
+        //-------------end fragment shit
+
 
         db = new DatabaseHandler(getApplicationContext());
 
@@ -157,6 +183,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        //calendarView shit
+        calendar = (CalendarView) findViewById(R.id.calendarView);
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+
+                startNextFragment();
+            }
+        });
+
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String name = sharedpreferences.getString(FIRSTNAME, "");
@@ -166,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-        
+
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -214,4 +250,18 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void startNextFragment()
+    {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        AddInfo_Fragment addInfo_fragment = new AddInfo_Fragment();
+        fragmentTransaction.replace(R.id.calendarView, addInfo_fragment, "addinfo");
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+    }
+    public void onFragmentInteraction(Uri uri){
+
+    }
+
 }
