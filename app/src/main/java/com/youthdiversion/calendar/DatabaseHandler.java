@@ -2,6 +2,7 @@ package com.youthdiversion.calendar;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -48,7 +49,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Table Create Statements
     // Todo table create statement
     private static final String CREATE_TABLE_MEMBER = "CREATE TABLE "
-            + TABLE_MEMBER + "(" + MEMBER_KEY + " INTEGER PRIMARY KEY," + MEMBER_EMAIL
+            + TABLE_MEMBER + "(" + MEMBER_KEY + " INTEGER PRIMARY KEY AUTO_INCREMENT," + MEMBER_EMAIL
             + " TEXT," + MEMBER_PASSWORD + " TEXT," + MEMBER_PHONE + " TEXT,"+ MEMBER_FNAME + " TEXT," + MEMBER_LNAME
             + " TEXT" + ")";
 
@@ -121,7 +122,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void DeleteAvailability(long availabilityID)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete( TABLE_AVAILABILITY, AVAIL_KEY + " = ?", new String[] {String.valueOf(availabilityID)});
+        db.delete(TABLE_AVAILABILITY, AVAIL_KEY + " = ?", new String[]{String.valueOf(availabilityID)});
     }
 
 
@@ -142,6 +143,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         long member_id = db.insert(TABLE_MEMBER, null, values);
 
         return member_id;
+    }
+
+    public boolean selectMember(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_MEMBER + " WHERE "
+                + MEMBER_KEY + " = " + id;
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c != null)
+            return true;
+        else
+            return false;
     }
 
     //update an input in the member table
