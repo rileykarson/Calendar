@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         db = new DatabaseHandler(getApplicationContext());
 
+
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String name = sharedpreferences.getString(FIRSTNAME, "");
         if (name == "") {
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-        
+
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {

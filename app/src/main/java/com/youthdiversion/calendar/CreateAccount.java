@@ -20,11 +20,14 @@ public class CreateAccount extends AppCompatActivity {
     public final String PASSWORD = "passwordkey";
     public static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences sharedpreferences;
+    DatabaseHandler db;
+    Member member;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        db = new DatabaseHandler(getApplicationContext());
     }
 
     public void onClickSubmitButton(View v) {
@@ -53,9 +56,27 @@ public class CreateAccount extends AppCompatActivity {
             editor.putString(PHONE, phone);
             editor.putString(PASSWORD, password);
             editor.commit();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            int idNumber;
+            idNumber = Integer.parseInt(id);
+            member = new Member(idNumber, firstName, lastName, password, email, phone);
+            if(populateDB(member)) {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                //do nothing????
+            }
+        }
+    }
+
+    public boolean populateDB(Member member) {
+        if(db.selectMember(member.getId())) {
+            db.InsertMember(member);
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }
