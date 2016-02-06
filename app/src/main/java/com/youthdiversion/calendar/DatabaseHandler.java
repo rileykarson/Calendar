@@ -12,6 +12,8 @@ import java.io.Console;
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
+    SQLiteDatabase db;
+
 
     // Database Version
     private static final int DATABASE_VERSION = 1;
@@ -52,16 +54,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Tag table create statement
     private static final String CREATE_TABLE_AVAILABILITY = "CREATE TABLE "
             + TABLE_AVAILABILITY + "(" + AVAIL_KEY + " INTEGER PRIMARY KEY," + AVAIL_DATE
-            + " DATETIME," + AVAIL_START + " DATETIME," + AVAIL_END + " DATETIME,"+ AVAIL_FOREIGN + " INTEGER FOREIGN KEY," + ")";
+            + " DATETIME," + AVAIL_START + " DATETIME," + AVAIL_END + " DATETIME,"+ AVAIL_FOREIGN + " INTEGER" + ")";
 
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        db = getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        System.out.println("onCreate");
+        System.out.println("DATABASE on Create");
         db.execSQL(CREATE_TABLE_MEMBER);
         db.execSQL(CREATE_TABLE_AVAILABILITY);
     }

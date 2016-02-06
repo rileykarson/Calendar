@@ -20,9 +20,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        System.out.println("In main on create");
+
         db = new DatabaseHandler(getApplicationContext());
 
+
         Member member = new Member(1, "chris", "cartwright", "password", "email", "6134545454");
+
+        db.InsertMember(member);
 
 
 
