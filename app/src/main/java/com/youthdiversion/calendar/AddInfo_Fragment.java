@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,11 +36,21 @@ public class AddInfo_Fragment extends Fragment {
     private String mParam2;
     private String startTime;
     private String endTime;
+    public final String FIRSTNAME = "firstnamekey";
+    public final String LASTNAME = "lastnamekey";
+    public final String EMAIL = "emailkey";
+    public final String ID = "idkey";
+    public final String PHONE = "phonekey";
+    public final String PASSWORD = "passwordkey";
     private View myContainer;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    SharedPreferences sharedpreferences;
 
     private InputMethodManager imm;
 
     private OnFragmentInteractionListener mListener;
+
+    DatabaseHandler db;
 
     /**
      * Use this factory method to create a new instance of
@@ -69,6 +80,7 @@ public class AddInfo_Fragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            db = new DatabaseHandler(getActivity().getApplicationContext());
         }
 
     }
@@ -86,11 +98,20 @@ public class AddInfo_Fragment extends Fragment {
         Button btn = (Button) view.findViewById(R.id.availSubmit);
         myContainer = container;
 
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int idNumber;
                 imm.hideSoftInputFromWindow(myContainer.getWindowToken(), 0);
                 getActivity().onBackPressed();
+                sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                String name = sharedpreferences.getString(ID, "");
+                idNumber = Integer.parseInt(name);
+                Availability availability = new Availability(5, idNumber, startTime, endTime);
+
+                populateData(availability);
+
 
             }
         });
@@ -101,6 +122,9 @@ public class AddInfo_Fragment extends Fragment {
         return view;
     }
 
+    public void populateData(Availability availability) {
+        db.InsertAvailability(availability);
+    }
 
 
     // TODO: Rename method, update argument and hook method into UI event

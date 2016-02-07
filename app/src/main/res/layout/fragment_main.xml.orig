@@ -9,10 +9,19 @@
     tools:showIn="@layout/activity_main"
     tools:context="com.youthdiversion.calendar.MainActivityFragment">
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 46b9819668c4258adec7a66d68a405b4d176a5ec
     <CalendarView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-android:id="@+id/calendarView"
+        android:id="@+id/calendarView"
+<<<<<<< HEAD
+        android:onClick=""/>
+=======
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+>>>>>>> 46b9819668c4258adec7a66d68a405b4d176a5ec
+
 </RelativeLayout>

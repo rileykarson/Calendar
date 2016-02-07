@@ -64,25 +64,49 @@ public class MainActivity extends AppCompatActivity implements AddInfo_Fragment.
 
         db = new DatabaseHandler(getApplicationContext());
 
-        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-//calendarView shit
+<<<<<<< HEAD
+        //calendarView shit
         calendar = (CalendarView) findViewById(R.id.calendarView);
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 startNextFragment();
             }
-        });@Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                startNextFragment();
-            }
-        });        String name = sharedpreferences.getString(FIRSTNAME, "");
+        });
+
+
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+=======
+
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+>>>>>>> 46b9819668c4258adec7a66d68a405b4d176a5ec
+        String name = sharedpreferences.getString(FIRSTNAME, "");
         if (name == "") {
             Intent intent = new Intent(this, CreateAccount.class);
             startActivity(intent);
             finish();
         }
+<<<<<<< HEAD
+
+
+       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.remove(FIRSTNAME);
+                editor.remove(LASTNAME);
+                editor.remove(EMAIL);
+                editor.remove(ID);
+                editor.remove(PHONE);
+                editor.remove(PASSWORD);
+                editor.commit();
             }
+        });
+=======
+>>>>>>> 46b9819668c4258adec7a66d68a405b4d176a5ec
+    }
 
     public static String format(GregorianCalendar calendar){
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

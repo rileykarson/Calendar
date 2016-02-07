@@ -2,10 +2,10 @@ package com.youthdiversion.calendar;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.io.Console;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
@@ -42,6 +42,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String AVAIL_START = "startTime";
     private static final String AVAIL_END = "endTime";
     private static final String AVAIL_FOREIGN = "member_id";
+    private static final String AVAIL_SENT = "sent";
 
 
 
@@ -55,7 +56,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Tag table create statement
     private static final String CREATE_TABLE_AVAILABILITY = "CREATE TABLE "
             + TABLE_AVAILABILITY + "(" + AVAIL_KEY + " INTEGER PRIMARY KEY," +
-            AVAIL_START + " TEXT," + AVAIL_END + " TEXT,"+ AVAIL_FOREIGN + " INTEGER" + ")";
+            AVAIL_START + " TEXT," + AVAIL_END + " TEXT," + AVAIL_SENT + " TEXT," + AVAIL_FOREIGN + " INTEGER" + ")";
 
 
     public DatabaseHandler(Context context) {
@@ -96,6 +97,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(AVAIL_FOREIGN, availability.getMember_id());
         values.put(AVAIL_START, availability.getStartTime());
         values.put(AVAIL_END, availability.getEndTime());
+        values.put(AVAIL_SENT, availability.getSent());
 
         long availability_id = db.insert(TABLE_AVAILABILITY, null, values);
 
@@ -112,6 +114,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(AVAIL_START, availability.getStartTime());
         values.put(AVAIL_END, availability.getEndTime());
         values.put(AVAIL_FOREIGN, availability.getMember_id());
+        values.put(AVAIL_SENT, availability.getSent());
 
         return db.update(TABLE_AVAILABILITY, values, AVAIL_KEY + "= ?", new String[] {String.valueOf(availability.getId())});
 
@@ -121,7 +124,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void DeleteAvailability(long availabilityID)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete( TABLE_AVAILABILITY, AVAIL_KEY + " = ?", new String[] {String.valueOf(availabilityID)});
+        db.delete(TABLE_AVAILABILITY, AVAIL_KEY + " = ?", new String[]{String.valueOf(availabilityID)});
     }
 
 
@@ -142,6 +145,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         long member_id = db.insert(TABLE_MEMBER, null, values);
 
         return member_id;
+    }
+
+    public boolean selectMember(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_MEMBER + " WHERE "
+                + MEMBER_KEY + " = " + id;
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c != null)
+            return true;
+        else
+            return false;
     }
 
     //update an input in the member table

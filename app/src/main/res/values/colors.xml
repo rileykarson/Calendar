@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#0E85BC</color>
-    <color name="colorPrimaryDark">#0E85BC</color>
+    <color name="colorPrimaryDark">#0b6599</color>
     <color name="colorAccent">#8EBC45</color>
     <color name="colorSignupBackground">#EEEEEE</color>
 </resources>

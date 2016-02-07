@@ -8,12 +8,14 @@ public class Availability {
     private int avail_id, member_id;
     private String startTime;
     private String endTime;
+    private String sent;
 
-    public Availability(int id,int member_id, String startTime, String endTime) {
+    public Availability(int id,int member_id, String startTime, String endTime, String sent) {
         this.avail_id = id;
         this.member_id = member_id;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.sent = sent;
     }
 
     public int getId() {
@@ -48,4 +50,11 @@ public class Availability {
         this.endTime = endTime;
     }
 
+    public String getSent() {
+        return sent;
+    }
+
+    public void setSent(String sent) {
+        this.sent = sent;
+    }
 }

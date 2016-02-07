@@ -3,6 +3,7 @@ package com.youthdiversion.calendar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,15 +21,18 @@ public class CreateAccount extends AppCompatActivity {
     public final String PASSWORD = "passwordkey";
     public static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences sharedpreferences;
+    DatabaseHandler db;
+    Member member;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        db = new DatabaseHandler(getApplicationContext());
     }
 
     public void onClickSubmitButton(View v) {
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         EditText firstNameField=(EditText)findViewById(R.id.firstNameField);
         EditText lastNameField=(EditText)findViewById(R.id.lastNameField);
         EditText emailField=(EditText)findViewById(R.id.emailField);
@@ -53,9 +57,27 @@ public class CreateAccount extends AppCompatActivity {
             editor.putString(PHONE, phone);
             editor.putString(PASSWORD, password);
             editor.commit();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            int idNumber;
+            idNumber = Integer.parseInt(id);
+            member = new Member(idNumber, firstName, lastName, password, email, phone);
+            if(populateDB(member)) {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                //do nothing????
+            }
+        }
+    }
+
+    public boolean populateDB(Member member) {
+        if(db.selectMember(member.getId())) {
+            db.InsertMember(member);
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }
