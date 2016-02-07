@@ -166,4 +166,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete( TABLE_MEMBER, MEMBER_KEY + " = ?", new String[] {String.valueOf(memberID)});
     }
+
+    // closing database if not in use
+    public void closeDB() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db != null && db.isOpen())
+            db.close();
+    }
 }
