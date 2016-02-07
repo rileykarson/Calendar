@@ -3,6 +3,7 @@ package com.youthdiversion.calendar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     public void onClickSubmitButton(View v) {
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         EditText firstNameField=(EditText)findViewById(R.id.firstNameField);
         EditText lastNameField=(EditText)findViewById(R.id.lastNameField);
         EditText emailField=(EditText)findViewById(R.id.emailField);

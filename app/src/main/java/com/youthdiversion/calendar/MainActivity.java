@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -41,30 +42,13 @@ public class MainActivity extends AppCompatActivity {
         db = new DatabaseHandler(getApplicationContext());
 
 
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         String name = sharedpreferences.getString(FIRSTNAME, "");
         if (name == "") {
             Intent intent = new Intent(this, CreateAccount.class);
             startActivity(intent);
             finish();
         }
-
-
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.remove(FIRSTNAME);
-                editor.remove(LASTNAME);
-                editor.remove(EMAIL);
-                editor.remove(ID);
-                editor.remove(PHONE);
-                editor.remove(PASSWORD);
-                editor.commit();
-            }
-        });
     }
 
     public static String format(GregorianCalendar calendar){
@@ -92,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_availability){
+            Intent intent = new Intent(this, AvailabilityActivity.class);
+            startActivity(intent);
             return true;
         }
 
