@@ -23,20 +23,19 @@ public class ConfigEmail {
     private static String emailPassword = "4plL1lkM";
     private static String emailSubject;
     private static String attachmentPath;
-    private static Multipart multipart;
 
     public static Multipart getMultipart() throws IOException{
-        Multipart multipart = new MimeMultipart();
+        Multipart attachment = new MimeMultipart();
         File f = new File(attachmentPath);
         MimeBodyPart attachmentPart = new MimeBodyPart();
         try{
             attachmentPart.attachFile(f);
-            multipart.addBodyPart(attachmentPart);
+            attachment.addBodyPart(attachmentPart);
         }catch (Exception e){
             System.out.println("Error in reading file");
         }
 
-        return multipart;
+        return attachment;
     }
 
 
