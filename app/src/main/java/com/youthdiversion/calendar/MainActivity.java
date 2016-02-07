@@ -72,11 +72,10 @@ public class MainActivity extends AppCompatActivity implements AddInfo_Fragment.
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 startNextFragment();
             }
-        });@Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                startNextFragment();
-            }
-        });        String name = sharedpreferences.getString(FIRSTNAME, "");
+        });
+
+
+        String name = sharedpreferences.getString(FIRSTNAME, "");
         if (name == "") {
             Intent intent = new Intent(this, CreateAccount.class);
             startActivity(intent);

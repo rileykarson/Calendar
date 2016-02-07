@@ -21,11 +21,9 @@ public class AvailabilityActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this.getApplicationContext());
         rv.setLayoutManager(llm);
         List<Availability> times = new ArrayList<Availability>();
-        times.add(new Availability(1,2,"2","2","4"));
-        times.add(new Availability(1,2,"2","2","4"));
-        times.add(new Availability(1,2,"2","2","4"));
-        times.add(new Availability(1,2,"2","2","4"));
-        times.add(new Availability(1,2,"2","2","4"));
+        times.add(new Availability(1,2,"Available From:","2:30pm to 4:30pm","4"));
+        times.add(new Availability(1,2,"Available From:","9:00am to 12:00pm","4"));
+        times.add(new Availability(1,2,"Available From:","10:00am to 2:00pm","4"));
         RVAdapter adapter = new RVAdapter(times);
         rv.setAdapter(adapter);
     }

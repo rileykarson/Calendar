@@ -105,12 +105,6 @@ public class AddInfo_Fragment extends Fragment {
                 int idNumber;
                 imm.hideSoftInputFromWindow(myContainer.getWindowToken(), 0);
                 getActivity().onBackPressed();
-                sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                String name = sharedpreferences.getString(ID, "");
-                idNumber = Integer.parseInt(name);
-                Availability availability = new Availability(5, idNumber, startTime, endTime);
-
-                populateData(availability);
 
 
             }
@@ -121,10 +115,7 @@ public class AddInfo_Fragment extends Fragment {
 
         return view;
     }
-
-    public void populateData(Availability availability) {
-        db.InsertAvailability(availability);
-    }
+    
 
 
     // TODO: Rename method, update argument and hook method into UI event

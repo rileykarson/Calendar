@@ -8,7 +8,7 @@
     card_view:contentPadding="8dp"
     card_view:cardUseCompatPadding="true"
     android:id="@+id/cv"
-    card_view:cardBackgroundColor="@color/cardview_light_background">
+    card_view:cardBackgroundColor="#eeeeee">
 
     <TextView
         android:layout_width="wrap_content"
