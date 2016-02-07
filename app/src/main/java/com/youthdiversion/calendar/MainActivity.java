@@ -57,15 +57,7 @@ public class MainActivity extends AppCompatActivity implements AddInfo_Fragment.
         //fragment shit
         fragmentManager = getFragmentManager();
         CalendarView calendarView=(CalendarView) findViewById(R.id.calendarView);
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month,
-                                            int dayOfMonth) {
-                startNextFragment();
-
-            }
-        });
         //-------------end fragment shit
 
 
@@ -149,6 +141,20 @@ public class MainActivity extends AppCompatActivity implements AddInfo_Fragment.
     }
     public void onFragmentInteraction(Uri uri){
 
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0)
+        {
+            fm.popBackStack();
+        }
+        else
+        {
+            super.onBackPressed();
+        }
     }
 
 }

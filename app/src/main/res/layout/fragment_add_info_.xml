@@ -60,7 +60,8 @@
             android:layout_alignRight="@+id/endTime"
             android:layout_alignEnd="@+id/endTime"
             android:layout_alignLeft="@+id/endView"
-            android:layout_alignStart="@+id/endView" />
+            android:layout_alignStart="@+id/endView"
+            android:onClick="myClickHandler"/>
     </RelativeLayout>
 
 </FrameLayout>

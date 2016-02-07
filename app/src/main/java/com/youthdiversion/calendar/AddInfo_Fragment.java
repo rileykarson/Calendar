@@ -1,12 +1,19 @@
 package com.youthdiversion.calendar;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 /**
@@ -26,6 +33,11 @@ public class AddInfo_Fragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String startTime;
+    private String endTime;
+    private View myContainer;
+
+    private InputMethodManager imm;
 
     private OnFragmentInteractionListener mListener;
 
@@ -58,14 +70,38 @@ public class AddInfo_Fragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_add_info_, container, false);
+        startTime = ((EditText) view.findViewById(R.id.startTime)).getText().toString();
+
+        endTime = ((EditText) view.findViewById(R.id.endTime)).getText().toString();
+        imm= (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        Button btn = (Button) view.findViewById(R.id.availSubmit);
+        myContainer = container;
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imm.hideSoftInputFromWindow(myContainer.getWindowToken(), 0);
+                getActivity().onBackPressed();
+
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_info_, container, false);
+
+
+        return view;
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -107,5 +143,6 @@ public class AddInfo_Fragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
 
     }
+
 
 }
